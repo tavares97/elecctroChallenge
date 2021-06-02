@@ -44,6 +44,24 @@ const taskReducer = (state, action) => {
         ),
       };
 
+    case SORT_LIST:
+      return {
+        ...state,
+        tasks: action.payload,
+      };
+
+    case FILTER_LIST:
+      const filters = [false];
+      console.log(
+        action.payload.filter((task) => filters.includes(task.task_completed))
+      );
+      return {
+        ...state,
+        tasks: action.payload.filter((task) =>
+          filters.includes(task.task_completed)
+        ),
+      };
+
     default:
       return state;
   }

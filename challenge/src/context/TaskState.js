@@ -26,12 +26,13 @@ const TaskState = (props) => {
       task_id: "",
       task_name: "",
       task_completed: false,
+      task_created_at: "",
     },
   };
 
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
-  // @USED TO SAVE TO LOCAL STORAGE EVERY TIME THE 'tasks' STATE UPDATES 
+  // @USED TO SAVE TO LOCAL STORAGE EVERY TIME THE 'tasks' STATE UPDATES
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(state.tasks));
   }, [state.tasks]);
@@ -42,7 +43,7 @@ const TaskState = (props) => {
   const createTask = (task) => {
     task.task_id = uuidv4();
     task.task_completed = false;
-
+    task.task_created_at = new Date().toUTCString();
     dispatch({ type: CREATE_TASK, payload: task });
   };
 
@@ -66,6 +67,27 @@ const TaskState = (props) => {
     dispatch({ type: SET_COMPLETE, payload: id });
   };
 
+  //SORTS TASKS
+  // @SORTS ASCENDING OR DESCENDING
+  const sortTasks = (click, tasks) => {
+
+    if(click === 1) {
+      tasks.sort((a, b) => (a.task_name > b.task_name ? 1 : -1)) //SORTS FROM A-Z IF YOU CLICK 1 TIME
+    } else if (click === 2) {
+      tasks.sort((a, b) => (a.task_name < b.task_name ? 1 : -1)) //SORTS FROM Z-A IF YOU CLICK 2 TIMES
+    } else if (click === 3) {
+      tasks.sort((a, b) => (a.task_created_at > b.task_created_at ? 1 : -1)) //SORTS FROM CREATION DATE IF YOU CLICK 3 TIMES
+    }
+
+    dispatch({ type: SORT_LIST, payload: tasks});
+  };
+
+  //FILTERS THE TASKS
+  // @FILTERS OUT COMPLETED TASKS
+  const filterTasks = (tasks) => {
+    dispatch({ type: FILTER_LIST, payload: tasks});
+  }
+
   return (
     <TaskContext.Provider
       value={{
@@ -76,6 +98,8 @@ const TaskState = (props) => {
         deleteTask,
         setCompleted,
         editTask,
+        sortTasks,
+        filterTasks
       }}
     >
       {props.children}
