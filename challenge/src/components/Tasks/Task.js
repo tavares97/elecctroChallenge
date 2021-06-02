@@ -26,10 +26,10 @@ const Task = (props) => {
         <div className="ml-2">
           <input
             type="checkbox"
-            id="completed"
-            name="completed"
+            id={props.task.task_name}
+            name={props.task.task_name}
             onChange={onCheckboxChange}
-            checked={props.task.task_complete}
+            checked={props.task.task_completed}
             className="items-center transform scale-150"
           />
         </div>

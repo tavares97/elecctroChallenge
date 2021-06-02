@@ -34,14 +34,13 @@ const taskReducer = (state, action) => {
       };
 
     case SET_COMPLETE:
-      console.log(state.task.task_completed);
       return {
         ...state,
         //OVERLY COMPLICATED STUFF THAT MAKES THE TASK COMPLETED EQ TO TRUE OR FALSE DEPENDING ON THE CHECKBOX CLICK ---- **COULD BE IMPROVED**
         tasks: state.tasks.map((task) =>
-          action.payload === task.task_id && task.task_completed === false
-            ? { ...task, task_completed: true }
-            : { ...task, task_completed: false }
+          action.payload === task.task_id
+            ? { ...task, task_completed: !task.task_completed }
+            : task
         ),
       };
 
