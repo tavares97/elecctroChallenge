@@ -22,12 +22,7 @@ const TaskState = (props) => {
   //SETS INITIAL STATE FOR THE APP
   const initialState = {
     tasks: localData ? JSON.parse(localData) : [], //RETURNS THE LOCAL STORAGE VALUES IF THERE ARE ANY.
-    task: {
-      task_id: "",
-      task_name: "",
-      task_completed: false,
-      task_created_at: "",
-    },
+    task: null
   };
 
   const [state, dispatch] = useReducer(taskReducer, initialState);
