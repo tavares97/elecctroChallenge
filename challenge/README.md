@@ -35,4 +35,7 @@ The application should allow the user to
 
 - Add new task
 - Delete task
+- Edit task
 - Save state to localStorage
+- Login & Logout (brings no actual usage)
+
