@@ -1,29 +1,32 @@
-import Home from "./components/home/Home";
-import Footer from "./components/layout/Footer/Footer";
-import Navbar from "./components/layout/Navbar/Navbar";
-import Tasks from "./components/Tasks/Tasks";
-import TaskState from "./context/TaskState";
+import Home from './components/home/Home';
+import Footer from './components/layout/Footer/Footer';
+import Navbar from './components/layout/Navbar/Navbar';
+import Tasks from './components/Tasks/Tasks';
+import AuthState from './context/authContext/AuthState';
+import TaskState from './context/tasksContext/TaskState';
 
 function App() {
-  return (
-    <TaskState>
-      <div className="flex flex-col h-screen">
-        <header>
-          <Navbar />
-        </header>
+	return (
+		<AuthState>
+			<TaskState>
+				<div className='flex flex-col h-screen'>
+					<header>
+						<Navbar />
+					</header>
 
-        <main className="container mx-auto flex-grow">
-          <Home />
+					<main className='container mx-auto flex-grow'>
+						<Home />
 
-          <Tasks />
-        </main>
+						<Tasks />
+					</main>
 
-        <footer>
-          <Footer />
-        </footer>
-      </div>
-    </TaskState>
-  );
+					<footer>
+						<Footer />
+					</footer>
+				</div>
+			</TaskState>
+		</AuthState>
+	);
 }
 
 export default App;

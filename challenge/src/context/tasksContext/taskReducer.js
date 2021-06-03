@@ -30,6 +30,7 @@ const taskReducer = (state, action) => {
 			console.log(action.payload);
 			return {
 				...state,
+				//MAPS THROUGH THE TASKS ARRAY AND IF THE IDS MATCH MAKE CHANGES ELSE LEAVE THE OLD ONE
 				tasks: state.tasks.map(task =>
 					task.task_id === action.payload.task_id ? action.payload : task
 				),
@@ -39,6 +40,7 @@ const taskReducer = (state, action) => {
 		case SET_TASK:
 			return {
 				...state,
+				//FILLS THE TASK STATE
 				task: action.payload,
 			};
 
@@ -61,11 +63,9 @@ const taskReducer = (state, action) => {
 
 		case FILTER_LIST:
 			const filters = [false];
-			console.log(
-				action.payload.filter(task => filters.includes(task.task_completed))
-			);
 			return {
 				...state,
+				//FILTERS OUT THE COMPLETED TASKS
 				tasks: action.payload.filter(task =>
 					filters.includes(task.task_completed)
 				),
