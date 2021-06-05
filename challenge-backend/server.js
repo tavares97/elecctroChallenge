@@ -14,6 +14,14 @@ const init = async () => {
 		method: 'GET',
 		path: '/',
 		handler: (req, res) => {
+			return queries.getAll();
+		},
+	});
+
+	server.route({
+		method: 'GET',
+		path: '/',
+		handler: (req, res) => {
 			const filter = req.query.filter;
 
 			return queries.getFilter(filter);
