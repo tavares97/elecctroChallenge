@@ -3,9 +3,6 @@ import { GoogleLogin } from 'react-google-login';
 
 import AuthContext from '../../context/authContext/authContext';
 
-const clientId =
-	'187575505098-d42stbvhplacntum0ttfgqtpemb4e7pa.apps.googleusercontent.com';
-
 const Login = () => {
 	const authContext = useContext(AuthContext);
 
